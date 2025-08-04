@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { toast } from "react-toastify";
+import SectionTitle from "../SectionTitle";
 import "react-toastify/dist/ReactToastify.css";
-import SocialLinks from "../../components/SocialLinks"; // adjust path
+import SocialLinks from "../../components/SocialLinks";
 
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const form = e.target;
     const formData = new FormData(form);
@@ -29,6 +34,7 @@ const Contact = () => {
 
       if (res.ok) {
         toast.success("Message sent successfully!");
+        setLoading(false);
         form.reset();
       } else {
         toast.error(result.message || "Oops! Something went wrong.");
@@ -43,10 +49,8 @@ const Contact = () => {
       id="contact"
       className="bg-white text-gray-800 py-24 px-6 md:px-12 lg:px-20 max-w-6xl mx-auto animate-fadeIn"
     >
-      <h2 className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-6">
-        Let’s Connect
-      </h2>
-      <p className="text-center text-lg text-gray-600 max-w-2xl mx-auto mb-14">
+      <SectionTitle title="Let's Connect" />
+      <p className="text-center text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto mb-14">
         Whether you’re looking to collaborate, hire, or just say hello — I’d love
         to hear from you. Drop a message and I’ll get back as soon as I can.
       </p>
@@ -70,7 +74,9 @@ const Contact = () => {
               name="name"
               required
               placeholder="Your Name"
-              className="w-full px-5 py-4 border border-gray-300 rounded-lg shadow-sm text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+              className="w-full px-5 py-4 border border-gray-300 rounded-lg shadow-sm
+                text-base md:text-lg
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
             />
           </div>
 
@@ -87,7 +93,9 @@ const Contact = () => {
               name="email"
               required
               placeholder="you@example.com"
-              className="w-full px-5 py-4 border border-gray-300 rounded-lg shadow-sm text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+              className="w-full px-5 py-4 border border-gray-300 rounded-lg shadow-sm
+                text-base md:text-lg
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
             />
           </div>
         </div>
@@ -104,7 +112,9 @@ const Contact = () => {
             id="subject"
             name="_subject"
             placeholder="Project Collaboration, Job Inquiry, etc."
-            className="w-full px-5 py-4 border border-gray-300 rounded-lg shadow-sm text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+            className="w-full px-5 py-4 border border-gray-300 rounded-lg shadow-sm
+                text-base md:text-lg
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           />
         </div>
 
@@ -121,13 +131,16 @@ const Contact = () => {
             rows="8"
             required
             placeholder="Type your message here..."
-            className="w-full px-5 py-4 border border-gray-300 rounded-lg shadow-sm text-lg resize-none focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
+            className="w-full px-5 py-4 border border-gray-300 rounded-lg shadow-sm
+                text-base md:text-lg
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           ></textarea>
         </div>
 
         <div className="text-center">
           <button
             type="submit"
+            disabled={loading}
             className="w-full bg-indigo-600 text-white text-lg font-semibold py-4 rounded-lg hover:bg-indigo-700 transition duration-300 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none"
           >
             Send Message

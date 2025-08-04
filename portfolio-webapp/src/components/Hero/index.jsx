@@ -9,6 +9,12 @@ function Hero() {
       <p className="text-lg sm:text-xl md:text-2xl font-light tracking-wide">
         A passionate Software Developer
       </p>
+      <a
+        href="#projects"
+        className="mt-6 inline-block bg-indigo-600 text-white font-semibold py-3 px-6 rounded-md hover:bg-indigo-700 transition"
+      >
+        View Projects
+      </a>
     </section>
   );
 }

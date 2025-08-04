@@ -32,7 +32,7 @@ function Header() {
               onClick={() => setActiveSection(section)}
               className={`no-underline font-semibold transition-all duration-300 ${
                 activeSection === section
-                  ? "text-indigo-700 text-[1.25rem]" // active style: darker + larger
+                  ? "text-indigo-700 underline underline-offset-4" // active style: darker + larger
                   : "text-indigo-900 hover:text-indigo-700 hover:text-[1.15rem]"
               }`}
             >
@@ -45,7 +45,7 @@ function Header() {
         <div className="hidden md:block">
           <a
             href="#contact"
-            className="no-underline inline-block bg-indigo-900 hover:bg-indigo-700 text-white font-bold text-base py-3 px-7 rounded-md shadow-md transition-transform hover:scale-105 whitespace-nowrap"
+            className="no-underline inline-block bg-indigo-900 hover:bg-indigo-700 text-white font-bold text-base py-3 px-7 rounded-md shadow-md whitespace-nowrap"
           >
             Let’s Connect
           </a>
@@ -94,19 +94,20 @@ function Header() {
               setMenuOpen(false);
               setActiveSection(section);
             }}
-            className={`block no-underline rounded-md px-4 py-3 font-semibold transition-colors duration-300 ${
+            className={`block w-full no-underline rounded-md px-4 py-3 font-semibold transition-colors duration-300 ${
               activeSection === section
-                ? "bg-indigo-100 text-indigo-700 scale-105"
+                ? "bg-indigo-100 text-indigo-700"
                 : "text-gray-900 hover:bg-gray-100 hover:text-indigo-700"
             }`}
           >
             {section.charAt(0).toUpperCase() + section.slice(1)}
           </a>
         ))}
+
         <a
           href="#contact"
           onClick={() => setMenuOpen(false)}
-          className="no-underline block bg-indigo-900 hover:bg-indigo-700 text-white font-bold text-center py-3 rounded-md shadow-md transition-transform hover:scale-105"
+          className="block w-full no-underline rounded-md px-4 py-3 font-semibold bg-indigo-900 text-white text-center hover:bg-indigo-700 transition-colors"
         >
           Let’s Connect
         </a>
