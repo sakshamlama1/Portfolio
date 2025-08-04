@@ -1,9 +1,6 @@
-import React from 'react';
-import './index.css';
-
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="bg-[#0f2027] text-gray-300 text-center py-6 px-4 text-sm font-light tracking-wide">
       <p>© 2025 Saksham Lama. All rights reserved.</p>
     </footer>
   );
