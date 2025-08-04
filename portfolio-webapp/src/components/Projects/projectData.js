@@ -10,7 +10,7 @@ Features include:
 - Image carousel in projects section  
 - SEO optimized  
 `,
-    images: ["/images/blog1.png", "/images/blog1-2.png", "/images/blog1-3.png"],
+    images: ["/images/blog1.png", "/images/blog1.png", "/images/blog1.png"],
     techStack: ["React", "Tailwind", "Vercel"],
     github: "https://github.com/yourusername/portfolio",
     demo: "https://yourportfolio.com",
@@ -26,7 +26,7 @@ Features include:
 - Image carousel in projects section  
 - SEO optimized  
 `,
-    images: ["/images/blog1.png", "/images/blog1-2.png", "/images/blog1-3.png"],
+    images: ["/images/blog1.png", "/images/blog1.png", "/images/blog1.png"],
     techStack: ["React", "Tailwind", "Vercel"],
     github: "https://github.com/yourusername/portfolio",
     demo: "https://yourportfolio.com",
@@ -42,7 +42,7 @@ Features include:
 - Image carousel in projects section  
 - SEO optimized  
 `,
-    images: ["/images/blog1.png", "/images/blog1-2.png", "/images/blog1-3.png"],
+    images: ["/images/blog1.png", "/images/blog1.png", "/images/blog1.png"],
     techStack: ["React", "Tailwind", "Vercel"],
     github: "https://github.com/yourusername/portfolio",
     demo: "https://yourportfolio.com",
@@ -58,7 +58,7 @@ Features include:
 - Image carousel in projects section  
 - SEO optimized  
 `,
-    images: ["/images/blog1.png", "/images/blog1-2.png", "/images/blog1-3.png"],
+    images: ["/images/blog1.png", "/images/blog1.png", "/images/blog1.png"],
     techStack: ["React", "Tailwind", "Vercel"],
     github: "https://github.com/yourusername/portfolio",
     demo: "https://yourportfolio.com",
@@ -74,7 +74,7 @@ Features include:
 - Image carousel in projects section  
 - SEO optimized  
 `,
-    images: ["/images/blog1.png", "/images/blog1-2.png", "/images/blog1-3.png"],
+    images: ["/images/blog1.png", "/images/blog1.png", "/images/blog1.png"],
     techStack: ["React", "Tailwind", "Vercel"],
     github: "https://github.com/yourusername/portfolio",
     demo: "https://yourportfolio.com",

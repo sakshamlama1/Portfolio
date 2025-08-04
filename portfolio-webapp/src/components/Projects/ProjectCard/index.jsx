@@ -12,58 +12,63 @@ function ProjectCard({ project }) {
     techStack,
   } = project;
 
-  const openModal = () => {
+  function openModal() {
     setModalImageIndex(0);
     setModalOpen(true);
-  };
+  }
 
   return (
     <>
-      <div className="bg-white rounded-2xl shadow-md p-6 max-w-xl w-full mx-auto flex flex-col hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-        {/* Image Preview */}
-        <div className="relative h-64 sm:h-72 lg:h-80 mb-6 rounded-xl overflow-hidden">
+      <div
+        onClick={openModal}
+        className="cursor-pointer bg-white rounded-lg shadow-lg p-6 max-w-[100vw] sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto hover:shadow-xl transition-shadow duration-300 flex flex-col"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') openModal(); }}
+        aria-label={`View more details about ${title} project`}
+      >
+        <div className="relative h-64 md:h-72 lg:h-80 mb-6 rounded overflow-hidden">
           <img
             src={images[0]}
             alt={`${title} preview`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
             loading="lazy"
           />
         </div>
 
-        {/* Title */}
-        <h3 className="text-indigo-900 font-bold text-xl sm:text-2xl mb-2">
+        <h3 className="text-indigo-900 font-extrabold text-2xl sm:text-3xl md:text-4xl mb-4 leading-tight">
           {title}
         </h3>
 
-        {/* Description */}
-        <p className="text-indigo-700 text-sm sm:text-base leading-relaxed mb-4">
+        <p className="text-indigo-800 text-base sm:text-lg md:text-xl mb-6 leading-relaxed">
           {description}
         </p>
 
-        {/* Tech Stack Tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {techStack.map((tech, idx) => (
-            <span
-              key={idx}
-              className="bg-indigo-100 text-indigo-800 text-xs sm:text-sm px-3 py-1 rounded-full font-medium"
-            >
-              {tech}
-            </span>
-          ))}
+       <div className="mb-6 text-center">
+          <h4 className="text-indigo-800 font-semibold mb-4 text-xl">
+            Tech Stack:
+          </h4>
+          <div className="flex flex-wrap justify-center gap-3">
+            {techStack.map((tech, idx) => (
+              <span
+                key={idx}
+                className="bg-indigo-100 text-indigo-800 text-sm sm:text-base px-4 py-1.5 rounded-full font-semibold select-none border border-indigo-300"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
 
-        {/* View More Button */}
         <button
           type="button"
           onClick={openModal}
-          className="mt-auto self-center sm:self-start bg-indigo-700 text-white text-sm sm:text-base font-medium px-5 py-2 rounded-md hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition"
-          aria-label={`View more about ${title} project`}
+          className="w-full bg-indigo-700 text-white font-semibold px-6 py-3 rounded-md hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
         >
           View More
         </button>
       </div>
 
-      {/* Modal */}
       {modalOpen && (
         <ProjectModal
           project={project}
