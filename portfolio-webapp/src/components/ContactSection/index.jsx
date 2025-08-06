@@ -4,6 +4,7 @@ import SectionTitle from "../SectionTitle";
 import "react-toastify/dist/ReactToastify.css";
 import SocialLinks from "../SocialLinks";
 import { useTheme } from "../../context/ThemeContext";
+import { motion } from "framer-motion";
 
 function ContactSection() {
   const [loading, setLoading] = useState(false);
@@ -54,16 +55,27 @@ function ContactSection() {
     >
       <div className="max-w-6xl mx-auto">
         <SectionTitle title="Let's Connect" />
-        <p
-          className={`text-center text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-14 ${
-            darkMode ? "text-gray-400" : "text-gray-600"
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className={`text-center text-xl sm:text-2xl md:text-2xl max-w-4xl mx-auto mb-14 leading-relaxed tracking-wide ${
+            darkMode ? "text-gray-300" : "text-gray-700"
           }`}
         >
           Whether you’re looking to collaborate, hire, or just say hello — I’d love
           to hear from you. Drop a message and I’ll get back as soon as I can.
-        </p>
+        </motion.p>
 
-        <form
+        {/* Aria-live region for screen readers */}
+        <div aria-live="polite" className="sr-only" />
+
+        <motion.form
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           onSubmit={handleSubmit}
           className={`space-y-10 max-w-4xl mx-auto rounded-xl shadow-xl p-8 md:p-12
             ${darkMode ? "bg-[#0f172a] shadow-black/40" : "bg-white shadow-gray-300"}
@@ -73,9 +85,9 @@ function ContactSection() {
             <div>
               <label
                 htmlFor="name"
-                className={`block text-base font-semibold mb-2 ${
-                  darkMode ? "text-gray-300" : "text-gray-700"
-                }`}
+                className={`block font-semibold mb-2 
+                  text-md sm:text-lg md:text-xl 
+                  ${darkMode ? "text-gray-300" : "text-gray-700"}`}
               >
                 Name
               </label>
@@ -85,7 +97,7 @@ function ContactSection() {
                 name="name"
                 required
                 placeholder="Your Name"
-                className={`w-full px-5 py-4 rounded-lg shadow-sm text-base md:text-lg
+                className={`w-full px-5 py-4 rounded-lg shadow-sm text-md sm:text-lg md:text-xl
                   border focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500
                   ${
                     darkMode
@@ -99,7 +111,7 @@ function ContactSection() {
             <div>
               <label
                 htmlFor="email"
-                className={`block text-base font-semibold mb-2 ${
+                className={`block text-md sm:text-lg md:text-xl font-semibold mb-2 ${
                   darkMode ? "text-gray-300" : "text-gray-700"
                 }`}
               >
@@ -111,7 +123,8 @@ function ContactSection() {
                 name="email"
                 required
                 placeholder="you@example.com"
-                className={`w-full px-5 py-4 rounded-lg shadow-sm text-base md:text-lg
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                className={`w-full px-5 py-4 rounded-lg shadow-sm text-md sm:text-lg md:text-xl
                   border focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500
                   ${
                     darkMode
@@ -126,7 +139,7 @@ function ContactSection() {
           <div>
             <label
               htmlFor="subject"
-              className={`block text-base font-semibold mb-2 ${
+              className={`block text-md sm:text-lg md:text-xl font-semibold mb-2 ${
                 darkMode ? "text-gray-300" : "text-gray-700"
               }`}
             >
@@ -137,7 +150,7 @@ function ContactSection() {
               id="subject"
               name="_subject"
               placeholder="Project Collaboration, Job Inquiry, etc."
-              className={`w-full px-5 py-4 rounded-lg shadow-sm text-base md:text-lg
+              className={`w-full px-5 py-4 rounded-lg shadow-sm text-md sm:text-lg md:text-xl
                 border focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500
                 ${
                   darkMode
@@ -151,7 +164,7 @@ function ContactSection() {
           <div>
             <label
               htmlFor="message"
-              className={`block text-base font-semibold mb-2 ${
+              className={`block text-md sm:text-lg md:text-xl font-semibold mb-2 ${
                 darkMode ? "text-gray-300" : "text-gray-700"
               }`}
             >
@@ -163,7 +176,7 @@ function ContactSection() {
               rows="8"
               required
               placeholder="Type your message here..."
-              className={`w-full px-5 py-4 rounded-lg shadow-sm text-base md:text-lg
+              className={`w-full px-5 py-4 rounded-lg shadow-sm text-md sm:text-lg md:text-xl
                 border focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500
                 ${
                   darkMode
@@ -175,19 +188,50 @@ function ContactSection() {
           </div>
 
           <div className="text-center">
-            <button
+            <motion.button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-600 text-white text-lg font-semibold py-4 rounded-lg hover:bg-indigo-700 transition duration-300 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:opacity-60 disabled:cursor-not-allowed"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+              className={`w-full text-md sm:text-lg md:text-xl font-semibold py-4 rounded-lg transition duration-300 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:opacity-60 disabled:cursor-not-allowed flex justify-center items-center gap-2
+              ${
+                darkMode 
+                  ? "bg-indigo-900 hover:bg-indigo-700 text-white" 
+                  : "bg-indigo-700 hover:bg-indigo-900 text-white"}`}
             >
+              {loading && (
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  ></path>
+                </svg>
+              )}
               {loading ? "Sending..." : "Send Message"}
-            </button>
+            </motion.button>
           </div>
 
           <div className="mt-20">
             <SocialLinks />
           </div>
-        </form>
+        </motion.form>
       </div>
     </section>
   );

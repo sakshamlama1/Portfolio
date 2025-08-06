@@ -20,6 +20,7 @@ const skills = [
 ];
 
 const getGradient = (level, darkMode) => {
+  // Gradients matching ContactSection's theme blues
   const hexToRgb = (hex) => {
     const bigint = parseInt(hex.slice(1), 16);
     return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
@@ -28,11 +29,13 @@ const getGradient = (level, darkMode) => {
   const rgbToHex = (r, g, b) =>
     "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
 
-  const lightStart = hexToRgb("#a5b4fc");
-  const lightEnd = hexToRgb("#312e81");
+  // Light mode: from indigo-300 to indigo-700 (similar to ContactSection's blues)
+  const lightStart = hexToRgb("#a5b4fc"); // indigo-300
+  const lightEnd = hexToRgb("#4338ca");   // indigo-700 darker shade
 
-  const darkStart = hexToRgb("#bfdbfe"); // blue-200
-  const darkEnd = hexToRgb("#3b82f6");   // blue-500
+  // Dark mode: from blue-300 to blue-600 (similar to ContactSection)
+  const darkStart = hexToRgb("#60a5fa");  // blue-400-ish
+  const darkEnd = hexToRgb("#2563eb");    // blue-600
 
   const startColor = darkMode ? darkStart : lightStart;
   const endColor = darkMode ? darkEnd : lightEnd;
@@ -62,18 +65,30 @@ function SkillsSection() {
     <section
       id="skills"
       className={`py-24 px-4 text-center transition-colors duration-300 ${
-        darkMode ? "bg-[#0f172a] text-gray-100" : "bg-gray-50 text-gray-900"
+        darkMode ? "bg-[#1e293b] text-gray-300" : "bg-indigo-50 text-gray-900"
       }`}
     >
       <div className="max-w-7xl mx-auto">
         <SectionTitle title="Skills" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto mt-12">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className={`max-w-3xl mx-auto mt-4 mb-10 text-xl sm:text-2xl md:text-2xl leading-relaxed tracking-wide ${
+            darkMode ? "text-gray-300" : "text-gray-700"
+          }`}
+        >
+          Here are some of the key technologies and tools I’m proficient in, honed through real projects and continuous learning.
+        </motion.p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
           {skills.map(({ name, level, icon: Icon }) => (
             <motion.div
               key={name}
-              className={`rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow cursor-default ${
-                darkMode ? "bg-slate-700" : "bg-indigo-50"
+              className={`rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-default ${
+                darkMode ? "bg-[#0f172a] text-gray-300" : "bg-white text-gray-900"
               }`}
               title={`${name} proficiency: ${level}%`}
               initial={{ opacity: 0, y: 20 }}
@@ -84,8 +99,8 @@ function SkillsSection() {
               <div className="flex justify-center mb-3">
                 <motion.div
                   whileHover={{ scale: 1.2 }}
-                  className={`text-4xl ${
-                    darkMode ? "text-blue-300" : "text-indigo-700"
+                  className={`text-5xl sm:text-6xl md:text-6xl ${
+                    darkMode ? "text-blue-400" : "text-indigo-700"
                   }`}
                   aria-hidden="true"
                 >
@@ -94,18 +109,14 @@ function SkillsSection() {
               </div>
 
               <h3
-                className={`text-lg font-semibold mb-3 ${
-                  darkMode ? "text-blue-200" : "text-indigo-700"
+                className={`text-xl sm:text-2xl md:text-2xl font-semibold mb-3 ${
+                  darkMode ? "text-blue-300" : "text-indigo-800"
                 }`}
               >
                 {name}
               </h3>
 
-              <div
-                className={`w-full ${
-                  darkMode ? "bg-slate-600" : "bg-indigo-200"
-                } rounded-full h-4`}
-              >
+              <div className="w-full bg-black/10 dark:bg-white/10 rounded-full h-4">
                 <motion.div
                   className="h-4 rounded-full"
                   style={{
