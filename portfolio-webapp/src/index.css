@@ -12,7 +12,6 @@ body {
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
   backface-visibility: hidden;
-  transform: translateZ(0);
 }
 
 html {
