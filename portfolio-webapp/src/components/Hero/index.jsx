@@ -26,6 +26,7 @@ function Hero() {
           w-full max-w-[1400px]
           px-6 sm:px-10 md:px-14 lg:px-20
           gap-8 sm:gap-10 md:gap-16 lg:gap-24
+          pt-6 sm:pt-8 md:pt-10 lg:pt-0
         "
       >
         {/* Left text */}
