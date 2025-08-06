@@ -15,7 +15,7 @@ function Hero() {
           : "from-indigo-50 via-indigo-100 to-indigo-200"}
         ${darkMode ? "text-white" : "text-gray-900"}
         flex items-center justify-center
-        pt-[120px] pb-[60px] min-h-[calc(100vh)] w-full
+        pt-[120px] pb-[60px] min-h-screen w-full
       `}
       style={{ scrollMarginTop: "100px" }}
     >
