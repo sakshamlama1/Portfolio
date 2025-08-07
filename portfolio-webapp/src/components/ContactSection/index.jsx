@@ -64,8 +64,8 @@ function ContactSection() {
             darkMode ? "text-gray-300" : "text-gray-700"
           }`}
         >
-          Whether you’re looking to collaborate, hire, or just say hello — I’d love
-          to hear from you. Drop a message and I’ll get back as soon as I can.
+          Whether you’re looking to collaborate, hire, or just say hello — I’d love to hear from you. 
+          Drop a message, and I’ll get back as soon as I can.
         </motion.p>
 
         {/* Aria-live region for screen readers */}
@@ -96,7 +96,7 @@ function ContactSection() {
                 id="name"
                 name="name"
                 required
-                placeholder="Your Name"
+                placeholder="Your name"
                 className={`w-full px-5 py-4 rounded-lg shadow-sm text-md sm:text-lg md:text-xl
                   border focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500
                   ${
@@ -149,7 +149,7 @@ function ContactSection() {
               type="text"
               id="subject"
               name="_subject"
-              placeholder="Project Collaboration, Job Inquiry, etc."
+              placeholder="Project collaboration, job inquiry, etc."
               className={`w-full px-5 py-4 rounded-lg shadow-sm text-md sm:text-lg md:text-xl
                 border focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500
                 ${

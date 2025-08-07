@@ -45,7 +45,8 @@ const ProjectSection = () => {
             darkMode ? "text-gray-300" : "text-gray-700"
           }`}
         >
-          These projects reflect my hands-on experience building functional, user-focused solutions using modern technologies.
+          These projects showcase my practical experience delivering functional, 
+          user-focused solutions with diverse tools and technologies.     
         </motion.p>
 
         {/* Projects Grid */}

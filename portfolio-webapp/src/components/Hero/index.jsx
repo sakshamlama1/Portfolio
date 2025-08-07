@@ -51,7 +51,7 @@ function Hero() {
               ${darkMode ? "text-indigo-200" : "text-indigo-800"}
             `}
           >
-            Building scalable web apps & secure digital solutions.
+            I create web apps that really work for people and businesses — solving real problems with care and reliability. Let’s bring your ideas to life together with thoughtful, dependable development.
           </p>
 
           <div className="flex flex-col sm:flex-row w-full max-w-sm sm:max-w-md justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-6 mt-6">

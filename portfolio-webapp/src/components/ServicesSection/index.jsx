@@ -13,19 +13,19 @@ const services = [
   {
     name: "Frontend Development",
     description:
-      "Building responsive, accessible UIs using React, Tailwind, and modern tooling.",
+      "Building responsive, accessible UIs using React, Tailwind CSS, and modern tooling.",
     icon: FaLaptopCode,
   },
   {
     name: "Backend Development",
     description:
-      "RESTful APIs and server-side logic using Node.js, Spring Boot, and databases.",
+      "RESTful APIs and server-side logic using Node.js, Spring Boot, Django and MySQL databases.",
     icon: FaServer,
   },
   {
     name: "Mobile-Friendly Design",
     description:
-      "Fully responsive designs optimized for phones, tablets, and desktops.",
+      "Fully responsive designs optimized for all devices, with wireframes created in Figma.",
     icon: FaMobileAlt,
   },
   {
@@ -37,7 +37,7 @@ const services = [
   {
     name: "DevOps & Deployment",
     description:
-      "CI/CD pipelines, GitHub Actions, cloud deployment, and environment configs.",
+      "CI/CD pipelines, Docker containerization, GitHub Actions, and environment configs.",
     icon: FaCloud,
   },
   {

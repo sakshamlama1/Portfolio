@@ -6,18 +6,23 @@ import {
   SiReact,
   SiTailwindcss,
   SiNodedotjs,
-  SiSpringboot,
+  SiDocker,
   SiMysql,
+  SiSpringboot,
+  SiPython
 } from "react-icons/si";
 
 const skills = [
-  { name: "JavaScript", level: 50, icon: SiJavascript },
-  { name: "React", level: 60, icon: SiReact },
-  { name: "Tailwind CSS", level: 70, icon: SiTailwindcss },
+  { name: "JavaScript", level: 85, icon: SiJavascript },
+  { name: "React", level: 80, icon: SiReact },
+  { name: "MySQL", level: 80, icon: SiMysql },
   { name: "Node.js", level: 75, icon: SiNodedotjs },
-  { name: "Spring Boot", level: 80, icon: SiSpringboot },
-  { name: "MySQL", level: 85, icon: SiMysql },
+  { name: "Spring Boot", level: 70, icon: SiSpringboot },
+  { name: "Django", level: 70, icon: SiPython },
+  { name: "Docker", level: 65, icon: SiDocker },
+  { name: "Tailwind CSS", level: 60, icon: SiTailwindcss }
 ];
+
 
 const getGradient = (level, darkMode) => {
   // Gradients matching ContactSection's theme blues
@@ -80,10 +85,11 @@ function SkillsSection() {
             darkMode ? "text-gray-300" : "text-gray-700"
           }`}
         >
-          Here are some of the key technologies and tools I’m proficient in, honed through real projects and continuous learning.
+          I’ve developed these key skills through hands-on projects and a commitment to continuous learning, 
+          allowing me to create thoughtful, robust solutions.
         </motion.p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mt-12">
           {skills.map(({ name, level, icon: Icon }) => (
             <motion.div
               key={name}
@@ -116,17 +122,26 @@ function SkillsSection() {
                 {name}
               </h3>
 
-              <div className="w-full bg-black/10 dark:bg-white/10 rounded-full h-4">
+              <div className="relative w-full bg-black/10 dark:bg-white/10 rounded-full h-4">
                 <motion.div
-                  className="h-4 rounded-full"
+                  className="h-4 rounded-full relative"
                   style={{
                     background: getGradient(level, darkMode),
                   }}
                   initial={{ width: 0 }}
                   animate={{ width: `${level}%` }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
-                />
+                >
+                  <span
+                    className={`absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold ${
+                      darkMode ? "text-white" : "text-white"
+                    }`}
+                  >
+                    {level}%
+                  </span>
+                </motion.div>
               </div>
+
             </motion.div>
           ))}
         </div>
