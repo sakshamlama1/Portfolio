@@ -85,8 +85,8 @@ function SkillsSection() {
             darkMode ? "text-gray-300" : "text-gray-700"
           }`}
         >
-          I’ve developed these key skills through hands-on projects and a commitment to continuous learning, 
-          allowing me to create thoughtful, robust solutions.
+          I’ve developed key skills through projects and continuous learning, 
+          enabling me to deliver thoughtful, robust solutions.
         </motion.p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mt-12">

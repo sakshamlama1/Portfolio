@@ -34,7 +34,7 @@ function Hero() {
           <h1
             className={`
               font-extrabold leading-tight
-              text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+              text-[clamp(1.875rem,6vw,3.75rem)]    /* fluid: 30px -> 60px */
               ${darkMode ? "text-white drop-shadow-xl" : "text-indigo-900"}
               tracking-tight
             `}
@@ -44,31 +44,46 @@ function Hero() {
 
           <p
             className={`
+              font-semibold uppercase tracking-widest
+              text-xs sm:text-sm
+              ${darkMode ? "text-indigo-300" : "text-indigo-600"}
+            `}
+            aria-hidden="true"
+          >
+            Turning ideas into reliable web apps
+          </p>
+
+          <p
+            className={`
               font-medium tracking-wide
-              text-lg sm:text-xl md:text-2xl
+              text-base sm:text-lg md:text-xl
               max-w-[400px] sm:max-w-[460px]
-              leading-snug
+              leading-relaxed
               ${darkMode ? "text-indigo-200" : "text-indigo-800"}
             `}
           >
-            I create web apps that really work for people and businesses — solving real problems with care and reliability. Let’s bring your ideas to life together with thoughtful, dependable development.
+            I build web apps that work for people and businesses — solving real problems with care and reliability. Let’s bring your ideas to life with thoughtful, dependable development.
           </p>
 
-          <div className="flex flex-col sm:flex-row w-full max-w-sm sm:max-w-md justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-6 mt-6">
+          <div className="flex flex-col sm:flex-row w-full max-w-sm sm:max-w-md justify-center lg:justify-start gap-4 mt-6">
             <a
               href="#projects"
-              className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-md sm:text-lg md:text-xl py-4 px-9 rounded-md shadow-lg transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400 text-center"
+              className="w-full sm:w-auto bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white font-semibold text-base sm:text-lg py-4 px-8 rounded-md shadow-lg transition-transform duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400 text-center"
+              aria-label="View projects"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="w-full sm:w-auto bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-semibold text-md sm:text-lg md:text-xl py-4 px-9 rounded-md shadow-lg transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400 text-center"
+              className="w-full sm:w-auto bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-semibold text-base sm:text-lg py-4 px-8 rounded-md shadow-lg transition-transform duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400 text-center"
+              aria-label="Contact Saksham"
             >
               Let’s Connect
             </a>
           </div>
         </div>
+
+
 
         {/* Right photo & social */}
         <div className="flex-1 flex flex-col items-center max-w-sm sm:max-w-md lg:max-w-lg">

@@ -5,7 +5,7 @@ import DarkLogo from "../../assets/DarkLogo.png";
 import ThemeToggle from "../ThemeToggle";
 import { useTheme } from "../../context/ThemeContext";
 
-function Header() {
+function Header({ isModalOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
   const { darkMode } = useTheme();
@@ -14,13 +14,11 @@ function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full shadow-md z-[1050] font-semibold transition-colors duration-300
-        ${
-          darkMode
-            ? "bg-[#0f172a] text-white" // lighter blue shade for dark mode bg
-            : "bg-gray-50 text-gray-900"
-        }
+      className={`fixed top-0 left-0 w-full shadow-md z-[10000] font-semibold transition-colors duration-300
+        ${darkMode ? "bg-[#0f172a] text-white" : "bg-gray-50 text-gray-900"}
+        ${isModalOpen ? "backdrop-blur-sm bg-opacity-70" : "bg-opacity-100"}
       `}
+      style={{ backdropFilter: isModalOpen ? "blur(6px)" : "none" }}
     >
       <div className="container mx-auto flex items-center justify-between h-[100px] px-4 sm:px-6 lg:px-10">
         {/* Logo */}
@@ -90,11 +88,11 @@ function Header() {
           <a
             href="#contact"
             className={`no-underline font-bold text-sm xl:text-lg py-2.5 px-5 rounded-md shadow-md whitespace-nowrap
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2
               transition-colors duration-300
               ${darkMode
-                ? "bg-indigo-900 hover:bg-indigo-700 text-white"
-                : "bg-indigo-700 hover:bg-indigo-900 text-white"
+                ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+                : "bg-indigo-700 hover:bg-indigo-600 text-white"
               }`}
           >
             Let’s Connect
@@ -172,8 +170,8 @@ function Header() {
           className={`block w-full no-underline rounded-md px-4 py-3 font-semibold text-center transition-colors
             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2
             ${darkMode
-              ? "bg-indigo-900 hover:bg-indigo-700 text-white"
-              : "bg-indigo-700 hover:bg-indigo-900 text-white"
+              ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+              : "bg-indigo-700 hover:bg-indigo-600 text-white"
             }`}
           tabIndex={0}
         >

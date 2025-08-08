@@ -3,14 +3,23 @@ import { useTheme } from "../../../context/ThemeContext";
 import { motion } from "framer-motion";
 
 const ProjectCard = ({ project, onSelect }) => {
-  const { title, description, stack, imageUrls } = project;
+  const { title, blurb, stack, imageUrls } = project;
   const { darkMode } = useTheme();
 
   const handleClick = () => onSelect?.();
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleClick();
+    }
+  };
+
+
   return (
     <div
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
       className={`max-w-xl sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl w-full cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-transform hover:scale-[1.02] 
@@ -34,7 +43,7 @@ const ProjectCard = ({ project, onSelect }) => {
           </h3>
 
           <p className="text-base sm:text-lg md:text-xl leading-relaxed text-slate-700 dark:text-slate-300 line-clamp-3 mb-4">
-            {description}
+            {blurb}
           </p>
 
           <div className="flex flex-wrap gap-3 justify-start">
@@ -60,10 +69,10 @@ const ProjectCard = ({ project, onSelect }) => {
             e.stopPropagation(); // Prevent card onClick triggering when clicking button
             handleClick();
           }}
-          className={`mt-auto w-full py-3 rounded-md text-sm sm:text-md md:text-lg px-3 font-semibold transition-colors duration-300
+          className={`mt-auto py-3 rounded-md text-sm sm:text-md md:text-lg px-3 font-semibold transition-colors duration-300 w-full sm:w-auto
             ${darkMode
-              ? "bg-indigo-900 hover:bg-indigo-700 text-white"
-              : "bg-indigo-700 hover:bg-indigo-900 text-white"
+              ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+              : "bg-indigo-700 hover:bg-indigo-600 text-white"
             }`}
           type="button"
           aria-label={`View more about ${title}`}

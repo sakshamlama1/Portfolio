@@ -88,7 +88,8 @@ const AboutMeSection = () => {
             href="#projects"
             className="
               w-full sm:w-[50%] 
-              bg-indigo-600 hover:bg-indigo-700 
+              bg-indigo-700 hover:bg-indigo-600
+              dark:bg-indigo-600 dark:hover:bg-indigo-700
               text-white font-semibold 
               text-lg sm:text-xl md:text-2xl 
               py-4 px-8 rounded-md shadow-lg 

@@ -198,8 +198,8 @@ function ContactSection() {
               className={`w-full text-md sm:text-lg md:text-xl font-semibold py-4 rounded-lg transition duration-300 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:opacity-60 disabled:cursor-not-allowed flex justify-center items-center gap-2
               ${
                 darkMode 
-                  ? "bg-indigo-900 hover:bg-indigo-700 text-white" 
-                  : "bg-indigo-700 hover:bg-indigo-900 text-white"}`}
+                  ? "bg-indigo-600 hover:bg-indigo-700 text-white" 
+                  : "bg-indigo-700 hover:bg-indigo-600 text-white"}`}
             >
               {loading && (
                 <svg

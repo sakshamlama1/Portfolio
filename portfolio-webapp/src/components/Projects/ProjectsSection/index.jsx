@@ -1,14 +1,11 @@
-import { useState } from "react";
 import SectionTitle from "../../SectionTitle";
 import ProjectCard from "../ProjectCard";
 import { useTheme } from "../../../context/ThemeContext";
 import { motion } from "framer-motion";
 import projectData from "../projectData";
-import ProjectModal from "../ProjectModal";
 
-const ProjectSection = () => {
+const ProjectSection = ({ onSelectProject }) => {
   const { darkMode } = useTheme();
-  const [selectedProject, setSelectedProject] = useState(null);
 
   const containerVariants = {
     hidden: {},
@@ -45,7 +42,7 @@ const ProjectSection = () => {
             darkMode ? "text-gray-300" : "text-gray-700"
           }`}
         >
-          These projects showcase my practical experience delivering functional, 
+          Showcasing my practical experience on delivering functional, 
           user-focused solutions with diverse tools and technologies.     
         </motion.p>
 
@@ -67,20 +64,12 @@ const ProjectSection = () => {
             >
               <ProjectCard
                 project={project}
-                onSelect={() => setSelectedProject(project)}
+                onSelect={() => onSelectProject(project)}
               />
             </motion.div>
           ))}
         </motion.div>
       </div>
-
-      {/* Modal */}
-      {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
     </section>
   );
 };

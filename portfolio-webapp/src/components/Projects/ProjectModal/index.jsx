@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-function ProjectModal({ project, onClose }) {
+function ProjectModal({ project, onClose, isModalOpen }) {
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -25,18 +25,18 @@ function ProjectModal({ project, onClose }) {
       <motion.div
         role="dialog"
         aria-modal="true"
-        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50 dark:bg-zinc-900/60 backdrop-blur-sm p-4"
+        className="fixed inset-0 z-[9998] flex items-start justify-center bg-black bg-opacity-50 dark:bg-zinc-900/60 backdrop-blur-sm p-4"
+        style={{ pointerEvents: "auto" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        style={{ overflow: "hidden" }} // Prevent backdrop scroll
       >
         <motion.div
           role="dialog"
           aria-modal="true"
-          className="relative w-full max-w-6xl mt-24 mb-12 bg-white dark:bg-zinc-900 rounded-xl shadow-xl border border-zinc-200 dark:border-zinc-700"
-          style={{ maxHeight: "85vh", overflowY: "auto", scrollBehavior: "smooth" }}
+          className="relative w-full max-w-6xl mb-12 bg-white dark:bg-zinc-900 rounded-xl shadow-xl border border-zinc-200 dark:border-zinc-700 mt-[100px] overflow-y-auto"
+          style={{ maxHeight: "calc(95vh - 100px)", scrollBehavior: "smooth" }}
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
@@ -56,13 +56,21 @@ function ProjectModal({ project, onClose }) {
           <div className="p-6 space-y-6">
             {/* Title */}
             <motion.h2
-              className="text-4xl font-bold text-gray-900 dark:text-white"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 text-center"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
               {project.title}
             </motion.h2>
+
+            {/* Role & Duration */}
+            <div className="flex justify-center mb-6">
+              <div className="flex flex-col sm:flex-row sm:gap-8 text-gray-600 dark:text-gray-400 text-center sm:text-left text-base sm:text-lg md:text-xl">
+                <div><strong>Role:</strong> {project.role}</div>
+                <div><strong>Duration:</strong> {project.duration}</div>
+              </div>
+            </div>
 
             {/* Image Carousel */}
             {project.imageUrls?.length > 0 && (
@@ -86,9 +94,8 @@ function ProjectModal({ project, onClose }) {
                 {/* Image Scroll Container */}
                 <div
                   ref={scrollRef}
-                  className="rounded-lg flex overflow-x-auto gap-4 shadow-md bg-white dark:bg-zinc-800 
-                            scroll-smooth snap-x snap-mandatory scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-zinc-600 scrollbar-track-transparent
-                            scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-zinc-600 scrollbar-track-transparent"
+                  className="rounded-lg flex overflow-x-auto gap-4 shadow-md bg-white dark:bg-zinc-800
+                            scroll-smooth snap-x snap-mandatory scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-zinc-600 scrollbar-track-transparent"
                   style={{ scrollSnapType: "x mandatory" }}
                 >
                   {project.imageUrls.map((img, index) => (
@@ -118,7 +125,7 @@ function ProjectModal({ project, onClose }) {
 
             {/* Description */}
             <motion.p
-              className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed"
+              className="text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.4 }}
@@ -126,13 +133,41 @@ function ProjectModal({ project, onClose }) {
               {project.longDescription || project.description}
             </motion.p>
 
+            {/* Challenge */}
+            {project.challenge && (
+              <div className="mb-4">
+                <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2 text-left">
+                  Challenges
+                </h4>
+                <ul className="list-disc list-inside text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 space-y-1 text-left">
+                  {project.challenge.map((point, i) => (
+                    <li key={i}>{point.trim()}</li>
+                  ))}
+                </ul> 
+              </div>
+            )}
+
+            {/* Features */}
+            {project.features && (
+              <div>
+                <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2 text-left">
+                  Features
+                </h4>
+                <ul className="list-disc list-inside text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 space-y-1 text-left">
+                  {project.features.map((feature, i) => (
+                    <li key={i}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Tech Stack */}
             {project.stack?.length > 0 && (
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {project.stack.map((tech, idx) => (
                   <motion.span
                     key={idx}
-                    className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-md rounded-full text-gray-800 dark:text-white"
+                    className="px-2 sm:px-3 py-0.5 sm:py-1 bg-gray-200 dark:bg-gray-700 text-sm sm:text-md rounded-full text-gray-800 dark:text-white"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 * idx + 0.3, duration: 0.3 }}
@@ -150,12 +185,11 @@ function ProjectModal({ project, onClose }) {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg inline-flex items-center gap-2 text-blue-700 dark:text-blue-400 hover:underline"
+                  className="text-base sm:text-lg inline-flex items-center gap-2 text-blue-700 dark:text-blue-400 hover:underline"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <FaGithub size={20} />
+                  <FaGithub size={18} />
                   GitHub
                 </motion.a>
               )}
@@ -164,12 +198,11 @@ function ProjectModal({ project, onClose }) {
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg inline-flex items-center gap-2 text-green-700 dark:text-green-400 hover:underline"
+                  className="text-base sm:text-lg inline-flex items-center gap-2 text-green-700 dark:text-green-400 hover:underline"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <ExternalLink size={20} />
+                  <ExternalLink size={18} />
                   Live Site
                 </motion.a>
               )}
@@ -197,55 +230,54 @@ function ProjectModal({ project, onClose }) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index, duration: 0.4, ease: "easeOut" }}
                     >
-                        <img
-                            src={related.image}
-                            alt={related.title}
-                            className="
-                                w-full
-                                object-contain
-                                rounded-t-lg
-
-                                h-[180px]          // mobile default height
-                                sm:h-[200px]       // small screen (≥640px)
-                                md:h-[220px]       // medium screen (≥768px)
-                                lg:h-[250px]       // large screen (≥1024px)
-                            "
-                        />
-                        <div className="p-4">
-                            <h4 className="text-xl font-medium mb-2 text-gray-900 dark:text-white">
-                                {related.title}
-                            </h4>
-                            <div className="flex gap-3 flex-wrap">
-                                {related.github && (
-                                    <motion.a
-                                        href={related.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-blue-500 hover:underline text-lg inline-flex items-center gap-1"
-                                        aria-label={`GitHub repository for ${related.title}`}
-                                        whileHover={{ scale: 1.1 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        <FaGithub size={18} />
-                                        GitHub
-                                    </motion.a>
-                                )}
-                                {related.live && (
-                                    <motion.a
-                                        href={related.live}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-green-500 hover:underline text-lg inline-flex items-center gap-1"
-                                        aria-label={`Live site for ${related.title}`}
-                                        whileHover={{ scale: 1.1 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        <ExternalLink size={18} />
-                                        Live Site
-                                    </motion.a>
-                                )}
-                            </div>
+                      <img
+                        src={related.imageUrls?.[0] || "/placeholder-image.png"}
+                        alt={`${related.title} screenshot`}
+                        className="
+                          w-full
+                          object-contain
+                          rounded-t-lg
+                          h-[180px]
+                          sm:h-[200px]
+                          md:h-[220px]
+                          lg:h-[250px]
+                        "
+                      />
+                      <div className="p-4">
+                        <h4 className="text-lg sm:text-xl font-medium mb-2 text-gray-900 dark:text-white">
+                          {related.title}
+                        </h4>
+                        <div className="flex gap-3 flex-wrap">
+                          {related.github && (
+                            <motion.a
+                              href={related.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-500 hover:underline text-lg inline-flex items-center gap-1 px-1 py-0.5"
+                              aria-label={`GitHub repository for ${related.title}`}
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <FaGithub size={18} />
+                              GitHub
+                            </motion.a>
+                          )}
+                          {related.live && (
+                            <motion.a
+                              href={related.live}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-green-500 hover:underline text-lg inline-flex items-center gap-1 px-1 py-0.5"
+                              aria-label={`Live site for ${related.title}`}
+                              whileHover={{ scale: 1.1 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <ExternalLink size={18} />
+                              Live Site
+                            </motion.a>
+                          )}
                         </div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>

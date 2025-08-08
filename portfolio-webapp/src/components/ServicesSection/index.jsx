@@ -25,13 +25,13 @@ const services = [
   {
     name: "Mobile-Friendly Design",
     description:
-      "Fully responsive designs optimized for all devices, with wireframes created in Figma.",
+      "Fully responsive layouts optimized for phones, tablets, and desktops using mobile-first principles.",
     icon: FaMobileAlt,
   },
   {
     name: "UI/UX Design",
     description:
-      "Clean, user-friendly interfaces that enhance user engagement and experience.",
+      "Clean, user-friendly interfaces enhanced by wireframes and prototypes in Figma.",
     icon: FaPalette,
   },
   {
