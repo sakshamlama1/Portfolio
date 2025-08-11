@@ -33,5 +33,19 @@ npm start
 
 Open http://localhost:3000 to view the app in your browser.
 
+Available Scripts
+npm start - Run the app in development mode
+
+npm run build - Build the app for production
+
+npm test - Launch the test runner
+
+npm run eject - Eject from Create React App configuration (use with caution)
+
+Folder Structure
+/src - Source files for components, styles, assets, etc.
+
+/public - Static files like index.html and images
+
 
 
