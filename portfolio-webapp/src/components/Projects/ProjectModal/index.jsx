@@ -2,9 +2,8 @@ import { useEffect, useRef } from "react";
 import { X, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
-function ProjectModal({ project, onClose, isModalOpen }) {
+function ProjectModal({ project, onClose }) {
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -75,23 +74,7 @@ function ProjectModal({ project, onClose, isModalOpen }) {
             {/* Image Carousel */}
             {project.imageUrls?.length > 0 && (
               <div className="relative">
-                {/* Scroll Buttons */}
-                <button
-                  onClick={() => scrollRef.current.scrollBy({ left: -300, behavior: "smooth" })}
-                  className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white dark:bg-zinc-700 p-2 rounded-full shadow-md hover:scale-110 transition"
-                  aria-label="Scroll left"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <button
-                  onClick={() => scrollRef.current.scrollBy({ left: 300, behavior: "smooth" })}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white dark:bg-zinc-700 p-2 rounded-full shadow-md hover:scale-110 transition"
-                  aria-label="Scroll right"
-                >
-                  <ChevronRight size={20} />
-                </button>
-
-                {/* Image Scroll Container */}
+                {/* Image Scroll Container WITHOUT arrows */}
                 <div
                   ref={scrollRef}
                   className="rounded-lg flex overflow-x-auto gap-4 shadow-md bg-white dark:bg-zinc-800
@@ -107,16 +90,15 @@ function ProjectModal({ project, onClose, isModalOpen }) {
                         snap-center
                         flex-shrink-0
                         w-full
-                        max-w-[100vw]
+                        h-auto
                         object-contain
                         rounded-md
-
-                        h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] xl:h-[500px]
                       "
                       style={{ scrollSnapAlign: "center" }}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index, duration: 0.4, ease: "easeOut" }}
+                      loading="lazy"
                     />
                   ))}
                 </div>
@@ -137,7 +119,7 @@ function ProjectModal({ project, onClose, isModalOpen }) {
             {project.challenge && (
               <div className="mb-4">
                 <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2 text-left">
-                  Challenges
+                  Challenge
                 </h4>
                 <ul className="list-disc list-inside text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 space-y-1 text-left">
                   {project.challenge.map((point, i) => (
@@ -193,18 +175,30 @@ function ProjectModal({ project, onClose, isModalOpen }) {
                   GitHub
                 </motion.a>
               )}
-              {project.live && (
-                <motion.a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-base sm:text-lg inline-flex items-center gap-2 text-green-700 dark:text-green-400 hover:underline"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ExternalLink size={18} />
-                  Live Site
-                </motion.a>
+              {project.live === "Upcoming" ? (
+                <div className="text-sm italic text-gray-500 dark:text-gray-400 mt-1 text-center">
+                  Live site under development — releasing soon!
+                </div>
+              ) : (
+                project.live && (
+                  <motion.a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base sm:text-lg inline-flex items-center gap-2 text-green-700 dark:text-green-400 hover:underline"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ExternalLink size={18} />
+                    Live Site
+                  </motion.a>
+                )
+              )}
+              {project.confidential && (
+                <div className="mt-4 text-sm italic text-gray-500 dark:text-gray-400 text-center">
+                  This project is proprietary to the University of Sydney and not publicly available.  
+                  Screenshots and detailed descriptions showcase its features and my contributions.
+                </div>
               )}
             </div>
 
@@ -235,12 +229,9 @@ function ProjectModal({ project, onClose, isModalOpen }) {
                         alt={`${related.title} screenshot`}
                         className="
                           w-full
+                          h-auto
                           object-contain
                           rounded-t-lg
-                          h-[180px]
-                          sm:h-[200px]
-                          md:h-[220px]
-                          lg:h-[250px]
                         "
                       />
                       <div className="p-4">

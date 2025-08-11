@@ -26,11 +26,23 @@ const ProjectCard = ({ project, onSelect }) => {
         ${darkMode ? "bg-slate-700" : "bg-indigo-50"} 
         flex flex-col h-full`}
     >
-      <img
-        src={imageUrls[0]}
-        alt={title}
-        className="w-full object-cover aspect-[16/9] sm:aspect-[4/3] md:aspect-[16/9] rounded-t"
-      />
+      <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden rounded-t">
+        {/* Blurred background fill */}
+        <img
+          src={imageUrls[0]}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover blur-md scale-110"
+          aria-hidden="true"
+        />
+
+        {/* Main image fully contained */}
+        <img
+          src={imageUrls[0]}
+          alt={title}
+          className="relative z-10 w-full h-full object-contain"
+          loading="lazy"
+        />
+      </div>
 
       <div className="p-6 flex flex-col flex-1"> {/* Slightly increased padding */}
         <div className="mb-6"> {/* Wrap for title + description + stack with bottom margin */}
