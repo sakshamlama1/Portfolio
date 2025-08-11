@@ -115,14 +115,14 @@ function ProjectModal({ project, onClose }) {
               {project.longDescription || project.description}
             </motion.p>
 
-            {/* Challenge */}
+            {/* Challenges */}
             {project.challenge && (
               <div className="mb-4">
                 <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2 text-left">
-                  Challenge
+                  Challenges
                 </h4>
                 <ul className="list-disc list-inside text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 space-y-1 text-left">
-                  {project.challenge.map((point, i) => (
+                  {project.challenges.map((point, i) => (
                     <li key={i}>{point.trim()}</li>
                   ))}
                 </ul> 
@@ -162,25 +162,26 @@ function ProjectModal({ project, onClose }) {
 
             {/* Links */}
             <div className="flex flex-wrap gap-4">
-              {project.github && (
-                <motion.a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-base sm:text-lg inline-flex items-center gap-2 text-blue-700 dark:text-blue-400 hover:underline"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <FaGithub size={18} />
-                  GitHub
-                </motion.a>
-              )}
+              
               {project.live === "Upcoming" ? (
                 <div className="text-sm italic text-gray-500 dark:text-gray-400 mt-1 text-center">
                   Live site under development — releasing soon!
                 </div>
               ) : (
-                project.live && (
+                (project.github && (
+                  <motion.a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base sm:text-lg inline-flex items-center gap-2 text-blue-700 dark:text-blue-400 hover:underline"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FaGithub size={18} />
+                    GitHub
+                  </motion.a>
+                )) ||
+                (project.live && (
                   <motion.a
                     href={project.live}
                     target="_blank"
@@ -192,8 +193,9 @@ function ProjectModal({ project, onClose }) {
                     <ExternalLink size={18} />
                     Live Site
                   </motion.a>
-                )
+                ))
               )}
+
               {project.confidential && (
                 <div className="mt-4 text-sm italic text-gray-500 dark:text-gray-400 text-center">
                   This project is proprietary to the University of Sydney and not publicly available.  

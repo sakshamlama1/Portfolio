@@ -6,7 +6,7 @@ const projectData = [
     stack: ["React", "JavaScript", "Leaflet", "Stripe API", "Node.js", "Express.js"],
     role: "Full-Stack Developer",
     duration: "Jul 2025 – Present",
-    challenge: [
+    challenges: [
       "Seamlessly integrating third-party services (Calendly, Stripe)",
       "Designing a responsive UI that aligns with client branding",
       "Adapting quickly to evolving client requirements"
@@ -40,8 +40,8 @@ const projectData = [
     description: `Developed during a consulting internship at the University of Sydney, this tool streamlines curriculum mapping by connecting unit learning outcomes to accreditation competencies. Led front-end development using React and Bootstrap, creating a responsive, user-friendly interface that supports Excel file uploads and interactive data visualizations. Worked closely with backend developers to integrate APIs, ensuring cross-browser compatibility and optimized performance.`,
     stack: ["React", "JavaScript", "Bootstrap CSS"],
     role: "Front-End Lead Developer",
-    duration: "Dec 2022 – Dec 2024 (Internship & Project Officer; Team Lead)",
-    challenge: [
+    duration: "Dec 2022 – Dec 2024",
+    challenges: [
       "Designing an intuitive UI accessible to both technical and non-technical users",
       "Managing dynamic Excel uploads and in-browser data visualization",
       "Ensuring responsive design and consistent cross-browser support",
@@ -69,7 +69,7 @@ const projectData = [
     stack: ["React", "JavaScript", "Axios", "Stripe API", "REST APIs", "Swagger", "Bootstrap CSS", "Figma"],
     role: "Front-End Lead Developer",
     duration: "Aug 2023 – Nov 2023",
-    challenge: [
+    challenges: [
       "Designing an accessible UI for elderly users",
       "Integrating complex backend APIs seamlessly",
       "Implementing secure and smooth Stripe payment processing",
@@ -111,7 +111,7 @@ const projectData = [
     stack: ["React", "Node.js", "Hyperledger Indy", "Docker", "MySQL", "MySQL Workbench"],
     role: "Full-Stack Developer",
     duration: "Aug 2023 – May 2024",
-    challenge: [
+    challenges: [
       "Designing a decentralized identity system enhancing security",
       "Integrating Hyperledger Indy SDK with backend and frontend",
       "Setting up Docker environments and managing MySQL databases",
