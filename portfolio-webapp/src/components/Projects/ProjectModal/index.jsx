@@ -44,7 +44,11 @@ function ProjectModal({ project, onClose }) {
         >
           {/* Close Button */}
           <button
-            className="absolute top-4 right-4 z-20 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+            className="absolute top-4 right-4 sm:top-4 sm:right-4 md:top-6 md:right-6 
+                      z-20 text-gray-600 dark:text-gray-300 
+                      hover:bg-gray-200 dark:hover:bg-zinc-700 
+                      p-2 rounded-full focus:outline-none 
+                      focus-visible:ring-2 focus-visible:ring-indigo-500"
             onClick={onClose}
             aria-label="Close modal"
           >
@@ -71,9 +75,18 @@ function ProjectModal({ project, onClose }) {
               </div>
             </div>
 
+            <div>
+              
+            </div>
+
             {/* Image Carousel */}
             {project.imageUrls?.length > 0 && (
               <div className="relative">
+                {typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches && project.imageUrls?.length > 1 (
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs sm:text-sm px-3 py-1 rounded-full z-10">
+                    Swipe to view more →
+                  </div>
+                )}
                 {/* Image Scroll Container WITHOUT arrows */}
                 <div
                   ref={scrollRef}
