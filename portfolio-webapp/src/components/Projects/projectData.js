@@ -1,3 +1,4 @@
+// Project portfolio data for rendering project cards and modals
 const projectData = [
   {
     title: "Pristine Smiles Website",

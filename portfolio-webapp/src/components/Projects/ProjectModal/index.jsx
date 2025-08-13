@@ -1,21 +1,55 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 function ProjectModal({ project, onClose }) {
   const scrollRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    if (!project) return;
+
+    // Close modal with Escape key
     const handleEsc = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", handleEsc);
+
+    // Trap focus in modal
+    const focusableEls = scrollRef.current?.closest('[role="dialog"]')?.querySelectorAll(
+      'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstEl = focusableEls?.[0];
+    const lastEl = focusableEls?.[focusableEls.length - 1];
+
+    const trapFocus = (e) => {
+      if (e.key !== "Tab") return;
+      if (e.shiftKey && document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      } else if (!e.shiftKey && document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
+      }
+    };
+
+    window.addEventListener("keydown", trapFocus);
+
+    // Prevent body scroll
     document.body.style.overflow = "hidden";
+
+    // Focus close button on open
+    closeButtonRef.current?.focus();
+    
+    // Detect touch capability
+    setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
     return () => {
       window.removeEventListener("keydown", handleEsc);
+      window.removeEventListener("keydown", trapFocus);
       document.body.style.overflow = "auto";
     };
-  }, [onClose]);
+  }, [onClose, project]);
 
   if (!project) return null;
 
@@ -24,6 +58,8 @@ function ProjectModal({ project, onClose }) {
       <motion.div
         role="dialog"
         aria-modal="true"
+        aria-labelledby="project-modal-title"
+        aria-describedby="project-modal-description"
         className="fixed inset-0 z-[9998] flex items-start justify-center bg-black bg-opacity-50 dark:bg-zinc-900/60 backdrop-blur-sm p-4"
         style={{ pointerEvents: "auto" }}
         initial={{ opacity: 0 }}
@@ -32,8 +68,6 @@ function ProjectModal({ project, onClose }) {
         onClick={onClose}
       >
         <motion.div
-          role="dialog"
-          aria-modal="true"
           className="relative w-full max-w-6xl mb-12 bg-white dark:bg-zinc-900 rounded-xl shadow-xl border border-zinc-200 dark:border-zinc-700 mt-[100px] overflow-y-auto"
           style={{ maxHeight: "calc(95vh - 100px)", scrollBehavior: "smooth" }}
           initial={{ scale: 0.95, opacity: 0 }}
@@ -59,6 +93,7 @@ function ProjectModal({ project, onClose }) {
           <div className="p-6 space-y-6">
             {/* Title */}
             <motion.h2
+              id="project-modal-title"
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white text-center"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -74,26 +109,28 @@ function ProjectModal({ project, onClose }) {
                 <div><strong>Duration:</strong> {project.duration}</div>
               </div>
             </div>
+
+            {/* Swipe Prompt */}
+            {isTouchDevice && project.imageUrls?.length > 1 && (
+              <p
+                className="text-center text-xs sm:text-sm text-gray-200 bg-black/60 px-3 py-1 rounded-full w-max mx-auto"
+                aria-label="Swipe to view more images"
+              >
+                Swipe to view more images →
+              </p>
+            )}
+
             {/* Image Carousel */}
             {project.imageUrls?.length > 0 && (
               <div className="relative">
-                {typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches && project.imageUrls?.length > 1 && (
-                  <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs sm:text-sm px-3 py-1 rounded-full z-10">
-                    Swipe to view more →
-                  </div>
-                )}
-                {/* Image Scroll Container WITHOUT arrows */}
                 <div
                   ref={scrollRef}
-                  className="rounded-lg flex overflow-x-auto gap-4 shadow-md bg-white dark:bg-zinc-800
-                            scroll-smooth snap-x snap-mandatory scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-zinc-600 scrollbar-track-transparent"
-                  style={{ scrollSnapType: "x mandatory" }}
+                  className="rounded-lg flex overflow-x-auto gap-4 shadow-md bg-white dark:bg-zinc-800 scroll-smooth snap-x snap-mandatory scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-zinc-600 scrollbar-track-transparent"
                 >
                   {project.imageUrls.map((img, index) => (
                     <div
                       key={index}
                       className="snap-center flex-shrink-0 w-full rounded-md overflow-hidden border border-gray-300 dark:border-zinc-700 shadow-sm bg-white dark:bg-zinc-900 flex items-center justify-center"
-                      style={{ scrollSnapAlign: "center" }}
                     >
                       <motion.img
                         src={img}
@@ -112,6 +149,7 @@ function ProjectModal({ project, onClose }) {
 
             {/* Description */}
             <motion.p
+              id="project-modal-description"
               className="text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -121,31 +159,31 @@ function ProjectModal({ project, onClose }) {
             </motion.p>
 
             {/* Challenges */}
-            {project.challenge && (
-              <div className="mb-4">
-                <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2 text-left">
+            {project.challenges?.length > 0 && (
+              <section>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Challenges
-                </h4>
-                <ul className="list-disc list-inside text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 space-y-1 text-left">
+                </h3>
+                <ul className="list-disc list-inside text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 space-y-1">
                   {project.challenges.map((point, i) => (
                     <li key={i}>{point.trim()}</li>
                   ))}
-                </ul> 
-              </div>
+                </ul>
+              </section>
             )}
 
             {/* Features */}
-            {project.features && (
-              <div>
-                <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2 text-left">
+            {project.features?.length > 0 && (
+              <section>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Features
-                </h4>
-                <ul className="list-disc list-inside text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 space-y-1 text-left">
+                </h3>
+                <ul className="list-disc list-inside text-base sm:text-lg md:text-lg text-gray-700 dark:text-gray-300 space-y-1">
                   {project.features.map((feature, i) => (
                     <li key={i}>{feature}</li>
                   ))}
                 </ul>
-              </div>
+              </section>
             )}
 
             {/* Tech Stack */}

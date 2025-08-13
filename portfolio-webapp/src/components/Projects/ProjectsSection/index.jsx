@@ -7,6 +7,7 @@ import projectData from "../projectData";
 const ProjectSection = ({ onSelectProject }) => {
   const { darkMode } = useTheme();
 
+  // Animation variants for staggered project cards appearance
   const containerVariants = {
     hidden: {},
     show: {
@@ -24,15 +25,16 @@ const ProjectSection = ({ onSelectProject }) => {
   return (
     <section
       id="projects"
+      aria-label="Projects showcase section"
       className={`py-24 px-4 text-center transition-colors duration-300 ${
         darkMode ? "bg-[#0f172a] text-gray-100" : "bg-white text-gray-900"
       }`}
     >
       <div className="max-w-7xl mx-auto">
-        {/* Title */}
+        {/* Section title */}
         <SectionTitle title="Projects" />
 
-        {/* Tagline */}
+        {/* Section tagline / intro text */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -46,7 +48,7 @@ const ProjectSection = ({ onSelectProject }) => {
           user-focused solutions with diverse tools and technologies.     
         </motion.p>
 
-        {/* Projects Grid */}
+        {/* Projects grid container with motion stagger animation */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -54,7 +56,7 @@ const ProjectSection = ({ onSelectProject }) => {
           viewport={{ once: true, amount: 0.2 }}
           className="grid gap-10 grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 mt-12"
         >
-          {projectData.map((project, index) => (
+          {projectData.map((project) => (
             <motion.div
               key={project.title}
               variants={cardVariants}

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { 
+import { useEffect, useState } from "react";
+import {
   Header, Hero, AboutMeSection, SkillsSection, ProjectsSection, ContactSection, Footer
 } from '../../components';
 import ProjectModal from '../../components/Projects/ProjectModal';
@@ -8,17 +8,28 @@ function LandingPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // When a project is selected:
   const handleOpenModal = (project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
 
-  // When modal is closed:
   const handleCloseModal = () => {
     setSelectedProject(null);
     setIsModalOpen(false);
   };
+
+  // Disable background scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isModalOpen]);
 
   return (
     <>
@@ -30,12 +41,11 @@ function LandingPage() {
       <ContactSection />
       <Footer />
 
-      {/* Modal */}
       {isModalOpen && selectedProject && (
           <ProjectModal 
-          project={selectedProject} 
-          onClose={handleCloseModal}
-          isModalOpen={isModalOpen} 
+            project={selectedProject} 
+            onClose={handleCloseModal}
+            isModalOpen={isModalOpen} 
           />
       )}
     </>

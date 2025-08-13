@@ -56,22 +56,25 @@ function ServicesSection() {
       {services.map(({ name, description, icon: Icon }) => (
         <motion.div
           key={name}
-          className={`rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-default ${
-            darkMode ? "bg-slate-700" : "bg-indigo-50"
-          }`}
+          className={`rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300`}
+          style={{
+            cursor: "default",
+            backgroundColor: darkMode ? "#334155" : "#e0e7ff", // slate-700 / indigo-50 hex for consistency
+          }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
+          tabIndex={-1} // non-focusable but explicit
+          aria-label={name}
         >
           <div className="flex justify-center mb-4">
             <motion.div
               whileHover={{ scale: 1.15 }}
-              className={`text-5xl sm:text-6xl md:text-6xl ${
-                darkMode ? "text-blue-300" : "text-indigo-700"
-              }`}
+              className={darkMode ? "text-blue-300" : "text-indigo-700"}
+              aria-hidden="true"
             >
-              <Icon />
+              <Icon size={48} />
             </motion.div>
           </div>
 

@@ -23,9 +23,7 @@ const skills = [
   { name: "Tailwind CSS", level: 60, icon: SiTailwindcss }
 ];
 
-
 const getGradient = (level, darkMode) => {
-  // Gradients matching ContactSection's theme blues
   const hexToRgb = (hex) => {
     const bigint = parseInt(hex.slice(1), 16);
     return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
@@ -34,11 +32,9 @@ const getGradient = (level, darkMode) => {
   const rgbToHex = (r, g, b) =>
     "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("");
 
-  // Light mode: from indigo-300 to indigo-700 (similar to ContactSection's blues)
   const lightStart = hexToRgb("#a5b4fc"); // indigo-300
   const lightEnd = hexToRgb("#4338ca");   // indigo-700 darker shade
 
-  // Dark mode: from blue-300 to blue-600 (similar to ContactSection)
   const darkStart = hexToRgb("#60a5fa");  // blue-400-ish
   const darkEnd = hexToRgb("#2563eb");    // blue-600
 
@@ -122,26 +118,26 @@ function SkillsSection() {
                 {name}
               </h3>
 
-              <div className="relative w-full bg-black/10 dark:bg-white/10 rounded-full h-4">
+              <div
+                role="progressbar"
+                aria-valuenow={level}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={`${name} proficiency level`}
+                className="relative w-full bg-black/10 dark:bg-white/10 rounded-full h-4 overflow-hidden"
+              >
                 <motion.div
-                  className="h-4 rounded-full relative"
-                  style={{
-                    background: getGradient(level, darkMode),
-                  }}
-                  initial={{ width: 0 }}
-                  animate={{ width: `${level}%` }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  className="h-4 rounded-full origin-left"
+                  style={{ background: getGradient(level, darkMode) }}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: level / 100 }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
                 >
-                  <span
-                    className={`absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold ${
-                      darkMode ? "text-white" : "text-white"
-                    }`}
-                  >
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs font-semibold text-white">
                     {level}%
                   </span>
                 </motion.div>
               </div>
-
             </motion.div>
           ))}
         </div>

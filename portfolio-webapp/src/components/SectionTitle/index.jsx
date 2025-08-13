@@ -11,17 +11,13 @@ function SectionTitle({ title }) {
     >
       <h2
         className="text-4xl sm:text-5xl md:text-5xl font-semibold leading-tight text-gray-900 dark:text-white"
-        style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.1)" }}
-        aria-label={title}
       >
         {title}
       </h2>
 
       <div
-        className="mx-auto mt-4 rounded-full"
+        className="mx-auto mt-4 rounded-full w-20 h-1"
         style={{
-          width: "5rem",
-          height: "0.25rem",
           background: "linear-gradient(to right, #373F68, #312E81)",
         }}
         aria-hidden="true"
