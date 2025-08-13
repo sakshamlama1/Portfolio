@@ -7,8 +7,7 @@ This is my personal portfolio website built with React and Tailwind CSS to showc
 - Responsive and modern UI using [Tailwind CSS](https://tailwindcss.com/)
 - Smooth animations and transitions with [Framer Motion](https://www.framer.com/motion/)
 - Interactive UI components enhanced by React Icons and Lucide React
-- Toast notifications via [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
-- Comprehensive testing setup with React Testing Library and Jest DOM
+- CLSX notifications via [clsx]([https://fkhadra.github.io/react-toastify/introduction](https://www.npmjs.com/package/clsx))
 
 ## Technologies & Libraries
 
@@ -16,8 +15,7 @@ This is my personal portfolio website built with React and Tailwind CSS to showc
 - Tailwind CSS
 - Framer Motion
 - React Icons & Lucide React
-- React Toastify
-- Testing Libraries: @testing-library/react, jest-dom, user-event
+- CLSX
 
 ## Installation
 
