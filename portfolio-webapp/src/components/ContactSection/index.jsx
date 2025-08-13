@@ -43,13 +43,13 @@ function ContactSection() {
   };
 
   // Focus first invalid input on submit
-  useEffect(() => {
-    const firstErrorField = Object.keys(errors)[0];
+  const focusFirstErrorField = (errorsObj) => {
+    const firstErrorField = Object.keys(errorsObj)[0];
     if (firstErrorField) {
       const element = document.getElementById(firstErrorField);
       element?.focus();
     }
-  }, [errors]);
+  };
 
   // Auto-hide status message after 4 seconds
   useEffect(() => {
@@ -71,6 +71,7 @@ function ContactSection() {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setStatusMessage("Please fix the errors in the form.");
+      focusFirstErrorField(validationErrors);
       return;
     }
 
