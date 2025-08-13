@@ -3,7 +3,7 @@ const projectData = [
     title: "Pristine Smiles Website",
     blurb: "Responsive dental clinic site featuring booking, pricing, and secure payments.",
     description: `Led full-stack development of a rebranded dental clinic website using React.js and Node.js. Integrated Leaflet for maps, Stripe for secure payments, and Calendly for bookings. Delivered a multi-page, user-friendly site with dynamic content, email notifications, and a secure backend with rate limiting.`,
-    stack: ["React", "JavaScript", "Leaflet", "Stripe API", "Node.js", "Express.js"],
+    stack: ["React", "JavaScript", "Node.js", "Express.js", "Bootstrap CSS", "Leaflet", "Stripe API", "Calendly API"],
     role: "Full-Stack Developer",
     duration: "Jul 2025 – Present",
     challenges: [
@@ -20,14 +20,21 @@ const projectData = [
       "Validated contact form with email notifications",
       "Backend API managing emails, security, and rate limiting"
     ],
-    imageUrls: ["/project_images/pristinesmiles/pristine1.png"],
+    imageUrls: [
+      "/project_images/pristinesmiles/pristine1.png",
+      "/project_images/pristinesmiles/pristine2.png",
+      "/project_images/pristinesmiles/pristine3.png",
+      "/project_images/pristinesmiles/pristine4.png",
+      "/project_images/pristinesmiles/pristine5.png",
+      "/project_images/pristinesmiles/pristine6.png",
+      "/project_images/pristinesmiles/pristine7.png",
+      "/project_images/pristinesmiles/pristine8.png"
+    ],
     github: "https://github.com/sakshamlama1/Pristine-Smiles-Website",
     live: "Upcoming",
     relatedPages: [
       {
         title: "Veneers At Smile Craft Landing Page",
-        description: "Developed a high-conversion promotional landing page for Smile Craft Dental’s veneers campaign using React.",
-        stack: ["React"],
         github: "https://github.com/sakshamlama1/SmileCraftDental-LandingPage",
         live: "https://veneersatsmilecraft.com",
         imageUrls: ["/project_images/smilecraftdental/veneers1.png"]
@@ -38,7 +45,7 @@ const projectData = [
     title: "Curriculum Mapping Tool",
     blurb: "Web app automating curriculum visualization through dynamic Excel data mapping.",
     description: `Developed during a consulting internship at the University of Sydney, this tool streamlines curriculum mapping by connecting unit learning outcomes to accreditation competencies. Led front-end development using React and Bootstrap, creating a responsive, user-friendly interface that supports Excel file uploads and interactive data visualizations. Worked closely with backend developers to integrate APIs, ensuring cross-browser compatibility and optimized performance.`,
-    stack: ["React", "JavaScript", "Bootstrap CSS"],
+    stack: ["React", "JavaScript", "Bootstrap"],
     role: "Front-End Lead Developer",
     duration: "Dec 2022 – Dec 2024",
     challenges: [
@@ -66,7 +73,7 @@ const projectData = [
     title: "Mature Missions Website",
     blurb: "Responsive elderly care platform with tailored dashboards and secure payments.",
     description: `Developed as a university project, this platform connects elderly users with caregivers for personal care and mobility support. Led front-end design and development using React and Bootstrap, ensuring accessibility and responsiveness. Integrated with a Java Spring Boot backend via REST APIs. Implemented subscription management with Stripe and notification systems.`,
-    stack: ["React", "JavaScript", "Axios", "Stripe API", "REST APIs", "Swagger", "Bootstrap CSS", "Figma"],
+    stack: ["React", "JavaScript", "Bootstrap", "REST APIs", "Stripe API", "Swagger", "Figma"],
     role: "Front-End Lead Developer",
     duration: "Aug 2023 – Nov 2023",
     challenges: [
@@ -77,7 +84,7 @@ const projectData = [
     ],
     features: [
       "Role-specific dashboards for users, caregivers, and admins",
-      "Subscription selection with secure Stripe payments",
+      "Subscription selection with secure Stripe payments", 
       "Service request lifecycle management (create, accept, cancel, rate)",
       "Profile management with editable details and notifications",
       "Email/SMS notifications for important updates",
@@ -108,7 +115,7 @@ const projectData = [
     title: "Blockchain-Powered Identity Management Application",
     blurb: "Secure, user-centric identity management leveraging blockchain technology.",
     description: `Developed a full-stack identity management application using React, Node.js, and the Hyperledger Indy framework. The platform provides decentralized, secure identity verification and management. Delivered a seminar on security and user focus, receiving positive feedback.`,
-    stack: ["React", "Node.js", "Hyperledger Indy", "Docker", "MySQL", "MySQL Workbench"],
+    stack: ["React", "Node.js", "Docker", "MySQL", "MySQL Workbench", "Hyperledger Indy SDK"],
     role: "Full-Stack Developer",
     duration: "Aug 2023 – May 2024",
     challenges: [
@@ -136,7 +143,7 @@ const projectData = [
       "/project_images/blockchain/blockchain-id7.png",
       "/project_images/blockchain/blockchain-id8.png"
     ],
-    github: "https://github.sydney.edu.au/slam7511/Decentralized-Blockchain-IDM",
+    github: "https://github.com/sakshamlama1/Decentralized-Blockchain-IDM",
     live: ""
   }
 ];

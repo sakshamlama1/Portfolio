@@ -6,6 +6,7 @@ const ProjectCard = ({ project, onSelect }) => {
   const { title, blurb, stack, imageUrls } = project;
   const { darkMode } = useTheme();
 
+  // Handles click or keyboard activation (Enter/Space) on the card container
   const handleClick = () => onSelect?.();
 
   const handleKeyDown = (e) => {
@@ -14,7 +15,6 @@ const ProjectCard = ({ project, onSelect }) => {
       handleClick();
     }
   };
-
 
   return (
     <div
@@ -25,17 +25,19 @@ const ProjectCard = ({ project, onSelect }) => {
       className={`max-w-xl sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl w-full cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-transform hover:scale-[1.02] 
         ${darkMode ? "bg-slate-700" : "bg-indigo-50"} 
         flex flex-col h-full`}
+      aria-label={`Project card: ${title}`}
     >
       <div className="relative w-full h-48 sm:h-56 md:h-64 overflow-hidden rounded-t">
-        {/* Blurred background fill */}
+        {/* Decorative blurred background for aesthetic depth */}
         <img
           src={imageUrls[0]}
           alt=""
           className="absolute inset-0 w-full h-full object-cover blur-md scale-110"
           aria-hidden="true"
+          loading="lazy"
         />
 
-        {/* Main image fully contained */}
+        {/* Main project image */}
         <img
           src={imageUrls[0]}
           alt={title}
@@ -44,8 +46,9 @@ const ProjectCard = ({ project, onSelect }) => {
         />
       </div>
 
-      <div className="p-6 flex flex-col flex-1"> {/* Slightly increased padding */}
-        <div className="mb-6"> {/* Wrap for title + description + stack with bottom margin */}
+      <div className="p-6 flex flex-col flex-1">
+        {/* Title, blurb and tech stack */}
+        <div className="mb-6">
           <h3
             className={`text-lg sm:text-xl md:text-2xl font-semibold mb-3 ${
               darkMode ? "text-blue-200" : "text-indigo-700"
@@ -72,13 +75,14 @@ const ProjectCard = ({ project, onSelect }) => {
           </div>
         </div>
 
+        {/* "View More" button triggers same onSelect but stops propagation */}
         <motion.button
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.2, delay: 0.1 }}
           onClick={(e) => {
-            e.stopPropagation(); // Prevent card onClick triggering when clicking button
+            e.stopPropagation();
             handleClick();
           }}
           className={`mt-auto py-3 rounded-md text-sm sm:text-md md:text-lg px-3 font-semibold transition-colors duration-300 w-full sm:w-auto
@@ -87,7 +91,7 @@ const ProjectCard = ({ project, onSelect }) => {
               : "bg-indigo-700 hover:bg-indigo-600 text-white"
             }`}
           type="button"
-          aria-label={`View more about ${title}`}
+          aria-label={`View more details about ${title}`}
         >
           View More <ArrowRight className="inline ml-2" size={18} />
         </motion.button>

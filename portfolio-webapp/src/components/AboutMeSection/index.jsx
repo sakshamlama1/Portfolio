@@ -12,11 +12,13 @@ const AboutMeSection = () => {
       className={`py-24 px-6 sm:px-8 md:px-12 transition-colors duration-300 ${
         darkMode ? "bg-[#0f172a] text-gray-100" : "bg-white text-gray-900"
       }`}
+      aria-labelledby="about-me-title"
     >
       <div className="max-w-7xl mx-auto text-center">
         {/* Main Title */}
-        <SectionTitle title="About Me" />
+        <SectionTitle title="About Me" id="about-me-title" />
 
+        {/* Intro paragraphs with motion fade-in on scroll */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,8 +60,9 @@ const AboutMeSection = () => {
           clarity, and accountability to every line I write. Let’s build something meaningful together.
         </motion.p>
 
-        {/* Services subtitle */}
+        {/* Services subtitle with accessible heading */}
         <motion.h3
+          id="what-i-offer"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -82,7 +85,11 @@ const AboutMeSection = () => {
             aria-hidden="true"
           />
         </motion.h3>
+
+        {/* Services Section Component */}
         <ServicesSection />
+
+        {/* Action Buttons */}
         <div className="w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-center gap-10 mt-14 px-4 sm:px-0">
           <a
             href="#projects"

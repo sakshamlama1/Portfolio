@@ -42,24 +42,24 @@ function ProjectModal({ project, onClose }) {
           transition={{ duration: 0.2 }}
           onClick={(e) => e.stopPropagation()}
         >
+          <div className="h-6" aria-hidden="true" />
           {/* Close Button */}
           <button
-            className="absolute top-4 right-4 sm:top-4 sm:right-4 md:top-6 md:right-6 
-                      z-20 text-gray-600 dark:text-gray-300 
-                      hover:bg-gray-200 dark:hover:bg-zinc-700 
-                      p-2 rounded-full focus:outline-none 
+            className="absolute top-0 right-0 mt-1 mr-1 sm:mt-1.5 sm:mr-2 md:mt-2 md:mr-3
+                      z-20 text-gray-600 dark:text-gray-300
+                      hover:bg-gray-200 dark:hover:bg-zinc-700
+                      p-2 rounded-full focus:outline-none
                       focus-visible:ring-2 focus-visible:ring-indigo-500"
             onClick={onClose}
             aria-label="Close modal"
           >
             <X size={24} />
           </button>
-
           {/* Modal Content */}
           <div className="p-6 space-y-6">
             {/* Title */}
             <motion.h2
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 text-center"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white text-center"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
@@ -74,15 +74,10 @@ function ProjectModal({ project, onClose }) {
                 <div><strong>Duration:</strong> {project.duration}</div>
               </div>
             </div>
-
-            <div>
-              
-            </div>
-
             {/* Image Carousel */}
             {project.imageUrls?.length > 0 && (
               <div className="relative">
-                {typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches && project.imageUrls?.length > 1 (
+                {typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches && project.imageUrls?.length > 1 && (
                   <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs sm:text-sm px-3 py-1 rounded-full z-10">
                     Swipe to view more →
                   </div>
@@ -95,24 +90,21 @@ function ProjectModal({ project, onClose }) {
                   style={{ scrollSnapType: "x mandatory" }}
                 >
                   {project.imageUrls.map((img, index) => (
-                    <motion.img
+                    <div
                       key={index}
-                      src={img}
-                      alt={`${project.title} screenshot ${index + 1}`}
-                      className="
-                        snap-center
-                        flex-shrink-0
-                        w-full
-                        h-auto
-                        object-contain
-                        rounded-md
-                      "
+                      className="snap-center flex-shrink-0 w-full rounded-md overflow-hidden border border-gray-300 dark:border-zinc-700 shadow-sm bg-white dark:bg-zinc-900 flex items-center justify-center"
                       style={{ scrollSnapAlign: "center" }}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 * index, duration: 0.4, ease: "easeOut" }}
-                      loading="lazy"
-                    />
+                    >
+                      <motion.img
+                        src={img}
+                        alt={`${project.title} screenshot ${index + 1}`}
+                        className="max-w-full max-h-full object-contain"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 * index, duration: 0.4, ease: "easeOut" }}
+                        loading="lazy"
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -210,9 +202,8 @@ function ProjectModal({ project, onClose }) {
               )}
 
               {project.confidential && (
-                <div className="mt-4 text-sm italic text-gray-500 dark:text-gray-400 text-center">
-                  This project is proprietary to the University of Sydney and not publicly available.  
-                  Screenshots and detailed descriptions showcase its features and my contributions.
+                <div className="text-sm italic text-gray-500 dark:text-gray-400 text-center">
+                  {project.confidential}
                 </div>
               )}
             </div>
@@ -261,7 +252,7 @@ function ProjectModal({ project, onClose }) {
                               rel="noopener noreferrer"
                               className="text-blue-500 hover:underline text-lg inline-flex items-center gap-1 px-1 py-0.5"
                               aria-label={`GitHub repository for ${related.title}`}
-                              whileHover={{ scale: 1.1 }}
+                              whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
                             >
                               <FaGithub size={18} />
@@ -275,7 +266,7 @@ function ProjectModal({ project, onClose }) {
                               rel="noopener noreferrer"
                               className="text-green-500 hover:underline text-lg inline-flex items-center gap-1 px-1 py-0.5"
                               aria-label={`Live site for ${related.title}`}
-                              whileHover={{ scale: 1.1 }}
+                              whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
                             >
                               <ExternalLink size={18} />

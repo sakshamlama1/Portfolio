@@ -10,6 +10,7 @@ function ContactSection() {
   const [loading, setLoading] = useState(false);
   const { darkMode } = useTheme();
 
+  // Handle form submission with validation and async POST request
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -18,7 +19,8 @@ function ContactSection() {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    if (!data.name || !data.email || !data.message) {
+    // Basic client-side validation
+    if (!data.name || !data.email || !data.subject || !data.message) {
       toast.error("Please fill all required fields.");
       setLoading(false);
       return;
@@ -49,12 +51,16 @@ function ContactSection() {
   return (
     <section
       id="contact"
+      aria-labelledby="contact-title"
       className={`w-full py-24 px-6 md:px-12 lg:px-20 animate-fadeIn
         ${darkMode ? "bg-[#1e293b] text-gray-300" : "bg-indigo-50 text-gray-900"}
       `}
     >
       <div className="max-w-6xl mx-auto">
-        <SectionTitle title="Let's Connect" />
+        {/* Section heading with aria-labelledby for accessibility */}
+        <SectionTitle title="Let's Connect" id="contact-title" />
+
+        {/* Intro paragraph with motion fade-in */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -68,20 +74,28 @@ function ContactSection() {
           Drop a message, and I’ll get back as soon as I can.
         </motion.p>
 
-        {/* Aria-live region for screen readers */}
+        {/* Aria-live region for announcing form status to screen readers */}
         <div aria-live="polite" className="sr-only" />
 
+        {/* Contact form */}
         <motion.form
+          onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          onSubmit={handleSubmit}
           className={`space-y-10 max-w-4xl mx-auto rounded-xl shadow-xl p-8 md:p-12
             ${darkMode ? "bg-[#0f172a] shadow-black/40" : "bg-white shadow-gray-300"}
           `}
+          noValidate
+          aria-describedby="contact-form-description"
         >
+          <p id="contact-form-description" className="sr-only">
+            Contact form with name, email, subject, and message fields. All fields except subject are required.
+          </p>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Name Field */}
             <div>
               <label
                 htmlFor="name"
@@ -89,7 +103,7 @@ function ContactSection() {
                   text-md sm:text-lg md:text-xl 
                   ${darkMode ? "text-gray-300" : "text-gray-700"}`}
               >
-                Name
+                Name <span aria-hidden="true" className="text-red-600">*</span>
               </label>
               <input
                 type="text"
@@ -105,9 +119,11 @@ function ContactSection() {
                       : "border-gray-300 bg-white text-gray-900 placeholder-gray-400"
                   }
                 `}
+                aria-required="true"
               />
             </div>
 
+            {/* Email Field */}
             <div>
               <label
                 htmlFor="email"
@@ -115,7 +131,7 @@ function ContactSection() {
                   darkMode ? "text-gray-300" : "text-gray-700"
                 }`}
               >
-                Email
+                Email <span aria-hidden="true" className="text-red-600">*</span>
               </label>
               <input
                 type="email"
@@ -132,10 +148,12 @@ function ContactSection() {
                       : "border-gray-300 bg-white text-gray-900 placeholder-gray-400"
                   }
                 `}
+                aria-required="true"
               />
             </div>
           </div>
 
+          {/* Subject Field - optional */}
           <div>
             <label
               htmlFor="subject"
@@ -143,12 +161,13 @@ function ContactSection() {
                 darkMode ? "text-gray-300" : "text-gray-700"
               }`}
             >
-              Subject
+              Subject <span aria-hidden="true" className="text-red-600">*</span>
             </label>
             <input
               type="text"
               id="subject"
               name="_subject"
+              required
               placeholder="Project collaboration, job inquiry, etc."
               className={`w-full px-5 py-4 rounded-lg shadow-sm text-md sm:text-lg md:text-xl
                 border focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500
@@ -158,9 +177,11 @@ function ContactSection() {
                     : "border-gray-300 bg-white text-gray-900 placeholder-gray-400"
                 }
               `}
+              aria-required="true"
             />
           </div>
 
+          {/* Message Field */}
           <div>
             <label
               htmlFor="message"
@@ -168,7 +189,7 @@ function ContactSection() {
                 darkMode ? "text-gray-300" : "text-gray-700"
               }`}
             >
-              Message
+              Message <span aria-hidden="true" className="text-red-600">*</span>
             </label>
             <textarea
               id="message"
@@ -184,9 +205,11 @@ function ContactSection() {
                     : "border-gray-300 bg-white text-gray-900 placeholder-gray-400"
                 }
               `}
+              aria-required="true"
             ></textarea>
           </div>
 
+          {/* Submit Button */}
           <div className="text-center">
             <motion.button
               type="submit"
@@ -200,6 +223,8 @@ function ContactSection() {
                 darkMode 
                   ? "bg-indigo-600 hover:bg-indigo-700 text-white" 
                   : "bg-indigo-700 hover:bg-indigo-600 text-white"}`}
+              aria-live="polite"
+              aria-busy={loading}
             >
               {loading && (
                 <svg
@@ -228,6 +253,7 @@ function ContactSection() {
             </motion.button>
           </div>
 
+          {/* Social links */}
           <div className="mt-20">
             <SocialLinks />
           </div>

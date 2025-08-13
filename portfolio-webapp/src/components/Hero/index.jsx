@@ -8,6 +8,7 @@ function Hero() {
 
   return (
     <section
+      aria-label="Introduction Hero Section"
       className={`
         bg-gradient-to-b 
         ${darkMode
@@ -29,7 +30,7 @@ function Hero() {
           pt-6 sm:pt-8 md:pt-10 lg:pt-0
         "
       >
-        {/* Left text */}
+        {/* Left text content */}
         <div className="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left max-w-xl space-y-6">
           <h1
             className={`
@@ -42,6 +43,7 @@ function Hero() {
             Hi, I'm Saksham Lama
           </h1>
 
+          {/* Decorative subtitle, hidden from screen readers */}
           <p
             className={`
               font-semibold uppercase tracking-widest
@@ -53,6 +55,7 @@ function Hero() {
             Turning ideas into reliable web apps
           </p>
 
+          {/* Main description paragraph */}
           <p
             className={`
               font-medium tracking-wide
@@ -65,35 +68,40 @@ function Hero() {
             I build web apps that work for people and businesses — solving real problems with care and reliability. Let’s bring your ideas to life with thoughtful, dependable development.
           </p>
 
+          {/* Call to action buttons */}
           <div className="flex flex-col sm:flex-row w-full max-w-sm sm:max-w-md justify-center lg:justify-start gap-4 mt-6">
             <a
               href="#projects"
               className="w-full sm:w-auto bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white font-semibold text-base sm:text-lg py-4 px-8 rounded-md shadow-lg transition-transform duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400 text-center"
-              aria-label="View projects"
+              aria-label="View projects section"
             >
               View Projects
             </a>
             <a
               href="#contact"
               className="w-full sm:w-auto bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-semibold text-base sm:text-lg py-4 px-8 rounded-md shadow-lg transition-transform duration-200 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400 text-center"
-              aria-label="Contact Saksham"
+              aria-label="Contact Saksham Lama"
             >
               Let’s Connect
             </a>
           </div>
         </div>
 
-
-
-        {/* Right photo & social */}
+        {/* Right photo & social links */}
         <div className="flex-1 flex flex-col items-center max-w-sm sm:max-w-md lg:max-w-lg">
-          <div className="flex-shrink-0 overflow-hidden rounded-3xl max-w-[500px] w-full">
+          <div
+            className="flex-shrink-0 overflow-hidden rounded-3xl max-w-[500px] w-full"
+            role="img"
+            aria-label="Profile picture of Saksham Lama"
+          >
             <img
               src={ProfilePicture}
-              alt="Profile"
+              alt="Saksham Lama"
               className="w-full h-full object-cover animate-fadeIn"
+              loading="lazy"  // Lazy load for performance
             />
           </div>
+
           <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mt-6">
             <SocialLinks />
           </div>
