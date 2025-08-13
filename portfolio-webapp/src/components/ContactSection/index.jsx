@@ -112,11 +112,11 @@ function ContactSection() {
   // Shared input class function with indigo error highlight
   const inputClass = (fieldError) =>
     clsx(
-      "w-full px-5 py-4 rounded-lg shadow-sm text-md sm:text-lg md:text-xl border focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500",
+      "w-full px-5 py-4 rounded-lg shadow-sm text-md sm:text-lg md:text-xl border focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500",
       darkMode
         ? "border-gray-600 bg-[#1e293b] text-gray-300 placeholder-gray-500"
         : "border-gray-300 bg-white text-gray-900 placeholder-gray-400",
-      fieldError && (darkMode ? "border-red-400" : "border-red-600")
+      fieldError && (darkMode ? "border-indigo-400" : "border-indigo-600")
     );
 
 
