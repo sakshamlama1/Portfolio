@@ -272,7 +272,7 @@ function ContactSection() {
                 exit={{ opacity: 0, y: -5 }}
                 transition={{ duration: 0.4 }}
                 className={clsx(
-                  "px-5 py-3 rounded-md border-l-1 mb-4",
+                  "px-5 py-3 rounded-md border-l-1 mb-4 relative overflow-hidden",
                   statusMessage.includes("Thank you")
                     ? "bg-green-50 border-green-500 text-green-800"
                     : "bg-red-50 border-red-500 text-red-800",
@@ -281,9 +281,23 @@ function ContactSection() {
                 role="alert"
               >
                 {statusMessage}
+                {/* Progress Bar */}
+                <motion.div
+                  className={clsx(
+                    "absolute bottom-0 left-0 h-1",
+                    statusMessage.includes("Thank you")
+                      ? "bg-green-500"
+                      : "bg-red-500",
+                    darkMode && "bg-indigo-500"
+                  )}
+                  initial={{ width: "100%" }}
+                  animate={{ width: "0%" }}
+                  transition={{ duration: 4, ease: "linear" }} // matches your 4s auto-hide
+                />
               </motion.div>
             )}
           </AnimatePresence>
+
 
           {/* Submit Button */}
           <div className="text-center">
